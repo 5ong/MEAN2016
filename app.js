@@ -14,7 +14,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
-var index = require('./routes/index');
+var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
@@ -70,7 +70,12 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/', index);
+app.get('*', function(req,res,next){
+  res.locals.user = req.user || null;
+  next();
+});
+
+app.use('/', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
