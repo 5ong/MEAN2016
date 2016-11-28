@@ -124,7 +124,7 @@ passport.use(new LocalStrategy(
 	}
 ));
 
-router.post('/login', passport.authenticate('local',{failureRedirect:'/user/login', failureFlash:'Invalid username or password'}), function(req, res){
+router.post('/login', passport.authenticate('local',{failureRedirect:'/users/login', failureFlash:'Invalid username or password'}), function(req, res){
 	console.log('Authentication Successful');
 	req.flash('success', 'You are logged in');
 	res.redirect('/');
